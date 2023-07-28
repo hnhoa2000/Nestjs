@@ -10,7 +10,7 @@ const UserSchema = new Schema(
     refreshToken: String,
     address: String,
     phone: String,
-    role: String,
+    role: { type: String, default: 'User' },
     Fpoint: Number
   },
   {

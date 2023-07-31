@@ -1,4 +1,5 @@
 import { Schema, Document } from 'mongoose';
+import { Role } from 'src/common/enum';
 
 const UserSchema = new Schema(
   {
@@ -10,7 +11,11 @@ const UserSchema = new Schema(
     refreshToken: String,
     address: String,
     phone: String,
-    role: { type: String, default: 'User' },
+    roles: {
+      type: [Number],
+      enum: Object.values(Role).filter((value) => typeof value === 'number'),
+      default: Role.USER,
+    },
     Fpoint: Number
   },
   {
@@ -35,6 +40,6 @@ export interface User extends Document {
   refreshToken: string,
   address: string,
   phone: string,
-  role: string,
+  roles: Role[],
   Fpoint: Number
 }

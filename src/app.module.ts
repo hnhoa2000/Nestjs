@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { UsersModule } from './user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { CategoryModule } from './category/category.module';
+import { RolesGuard } from './user/guards/roles.guard';
 
 @Module({
   imports: [
@@ -29,13 +32,13 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
           adapter: new HandlebarsAdapter(),
           options: {
             strict: true,
-          }, 
+          },
         },
       }),
       inject: [ConfigService],
     }),
+    CategoryModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: []
 })
 export class AppModule { }

@@ -30,10 +30,10 @@ export class AuthService {
   async login(LoginUserDto: UserDto) {
     const user = await this.usersService.findByLogin(LoginUserDto);
     const token = await this.createToken(user);
-    return { user, token };
+    return { user, ...token };
   }
 
-  async validateUser(email) {
+  async validateUser(email: string) {
     const user = await this.usersService.findByEmail(email);
     if (!user) {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);

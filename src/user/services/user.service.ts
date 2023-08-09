@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { UserDto } from "../dto/user.dto";
+import { UpdateUserDto, UserDto } from "../dto/user.dto";
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from "../repositories/user.repository";
 import { MailerService } from '@nestjs-modules/mailer';
+import { ServerMessage } from "src/common/constant";
 
 @Injectable()
 export class UserService {
@@ -39,10 +40,14 @@ export class UserService {
   async findByLogin(userLogin: UserDto) {
     const user = await this.findByEmail(userLogin.email);
     if (!user)
-      throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(ServerMessage.USER_NOT_FOUND, HttpStatus.UNAUTHORIZED);
     const is_equal = bcrypt.compare(userLogin.password, user.password);
     if (!is_equal)
-      throw new HttpException('Invalid password', HttpStatus.UNAUTHORIZED);
+      throw new HttpException(ServerMessage.INVALID_PASSWORD, HttpStatus.UNAUTHORIZED);
     return user;
+  }
+
+  async updateProfile(id: string, updateUser: UpdateUserDto) {
+    return this.userRepository.findByIdAndUpdate(id, updateUser);
   }
 }

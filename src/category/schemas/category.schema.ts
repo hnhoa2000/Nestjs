@@ -1,8 +1,10 @@
 import { Schema, Document } from 'mongoose';
+import {Product} from '../../product/schemas/product.schema'
 
 const CategorySchema = new Schema(
   {
-    NameCategory: { type: String}
+    NameCategory: String,
+    Products: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
   },
   {
     collection: 'categories',
@@ -12,5 +14,6 @@ const CategorySchema = new Schema(
 export { CategorySchema };
 
 export interface Category extends Document {
-  NameCategory: string
+  NameCategory: string,
+  Products:[Product]
 }

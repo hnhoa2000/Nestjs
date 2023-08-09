@@ -1,12 +1,12 @@
 import { Schema, Document } from 'mongoose';
-import { Role } from 'src/common/enum';
+import { Role, Gender } from 'src/common/enum';
 
 const UserSchema = new Schema(
   {
     firstName: String,
     lastName: String,
     email: { type: String, require: true },
-    gender: String,
+    gender: { type: String, enum: Object.values(Gender) },
     password: { type: String, require: true },
     refreshToken: String,
     address: String,

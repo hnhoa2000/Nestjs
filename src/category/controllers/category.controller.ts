@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, ValidationPipe, UseGuards, Delete } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/common/enum';
 import { Roles } from 'src/decorator/roles.decorator';
 import { RolesGuard } from 'src/user/guards/roles.guard';
 import { CategoryDto } from '../dto/category.dto';
 import { CategoryService } from '../services/category.service';
+import { IsMongoId } from 'class-validator';
 
 @Controller('category')
 export class CategoryController {
@@ -12,13 +13,26 @@ export class CategoryController {
   @Post()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(Role.ADMIN)
-  async addCategory(@Req() req: any, @Body() category: CategoryDto) {
-    console.log(req.user);
-    return this.categoryService.addCategory(category);
+  async addCategory(@Body() newCategory: CategoryDto) {
+    return this.categoryService.addCategory(newCategory);
+  }
+
+  @Put(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
+  async updateCategory(@Param('id') id: string, @Body() updateCategory: CategoryDto) {
+    return this.categoryService.updateCategory(id, updateCategory);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @Roles(Role.ADMIN)
+  async deleteCategory(@Param('id') id: string) {
+    return this.categoryService.deleteCategory(id);
   }
 
   @Get()
-  async getAllCaategory() {
-    return this.categoryService.getAllCaategory();
+  async getAllCategory() {
+    return this.categoryService.getAllCategory(); 
   }
 }

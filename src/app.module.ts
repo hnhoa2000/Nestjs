@@ -1,18 +1,17 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
+import { CacheModule } from '@nestjs/cache-manager';
 import { UsersModule } from './user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { CategoryModule } from './category/category.module';
-import { RolesGuard } from './user/guards/roles.guard';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    UsersModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
@@ -37,7 +36,12 @@ import { RolesGuard } from './user/guards/roles.guard';
       }),
       inject: [ConfigService],
     }),
+    CacheModule.register({
+      isGlobal:true
+    }),
+    UsersModule,
     CategoryModule,
+    ProductModule,
   ],
   controllers: []
 })

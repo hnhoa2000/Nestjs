@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Inject, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Role } from 'src/common/enum';
-import { Roles } from 'src/decorator';
-import { RolesGuard } from 'src/user/guards';
+import { Role } from '../../common/enum';
+import { Roles } from '../../decorator';
+import { RolesGuard } from '../../user/guards';
 import { CreateProductDto, UpdateProductDto } from '../dto';
 import { ProductService } from '../services/product.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';

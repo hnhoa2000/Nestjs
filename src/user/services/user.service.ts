@@ -3,7 +3,7 @@ import { UpdateUserDto, UserDto } from "../dto/user.dto";
 import * as bcrypt from 'bcrypt';
 import { UserRepository } from "../repositories/user.repository";
 import { MailerService } from '@nestjs-modules/mailer';
-import { ServerMessage } from "src/common/constant";
+import { ServerMessage } from "../../common/constant";
 
 @Injectable()
 export class UserService {

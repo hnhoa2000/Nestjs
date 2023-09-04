@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CategoryRepository } from 'src/category/reposiroties/category.repository';
-import { CategorySchema } from 'src/category/schemas/category.schema';
+import { CategoryRepository } from '.././category/reposiroties/category.repository';
+import { CategorySchema } from '../category/schemas/category.schema';
 import { ProductController } from './controllers/product.controller';
 import { ProductRepository } from './repositories/product.reposirory';
 import { ProductSchema } from './schemas/product.schema';

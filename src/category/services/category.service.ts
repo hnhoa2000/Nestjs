@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Types } from 'mongoose';
-import { ServerMessage } from 'src/common/constant';
+import { ServerMessage } from '../../common/constant';
 import { CategoryDto } from '../dto/category.dto';
 import { CategoryRepository } from '../reposiroties/category.repository';
 

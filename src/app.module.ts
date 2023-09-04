@@ -10,7 +10,10 @@ import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [`.env.${process.env.NODE_ENV}`],
+    }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     MailerModule.forRootAsync({
       imports: [ConfigModule],
@@ -37,7 +40,7 @@ import { ProductModule } from './product/product.module';
       inject: [ConfigService],
     }),
     CacheModule.register({
-      isGlobal:true
+      isGlobal: true
     }),
     UsersModule,
     CategoryModule,

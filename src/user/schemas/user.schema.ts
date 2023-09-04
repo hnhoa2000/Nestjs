@@ -1,5 +1,5 @@
 import { Schema, Document } from 'mongoose';
-import { Role, Gender } from 'src/common/enum';
+import { Role, Gender } from '../../common/enum';
 
 const UserSchema = new Schema(
   {

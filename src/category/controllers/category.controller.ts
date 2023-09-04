@@ -1,11 +1,10 @@
-import { Body, Controller, Get, Param, Post, Put, ValidationPipe, UseGuards, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, UseGuards, Delete } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Role } from 'src/common/enum';
-import { Roles } from 'src/decorator/roles.decorator';
-import { RolesGuard } from 'src/user/guards/roles.guard';
+import { Role } from '../../common/enum';
+import { Roles } from '../../decorator/roles.decorator';
+import { RolesGuard } from '../../user/guards/roles.guard';
 import { CategoryDto } from '../dto/category.dto';
 import { CategoryService } from '../services/category.service';
-import { IsMongoId } from 'class-validator';
 
 @Controller('category')
 export class CategoryController {
